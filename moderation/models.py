@@ -41,6 +41,14 @@ class ModerationAction(str, Enum):
     BLOCK = "BLOCK"
 
 
+class AnalysisStatus(str, Enum):
+    SAFE = "SAFE"
+    NOT_ANALYZED = "NOT_ANALYZED"
+    FAILED = "FAILED"
+    UNSUPPORTED = "UNSUPPORTED"
+    PARTIAL = "PARTIAL"
+
+
 class ContentType(str, Enum):
     """أنواع المحتوى والوسائط المدعومة في النظام"""
     TEXT = "text"
@@ -94,6 +102,7 @@ class ModerationResult:
     detected_item: Optional[str] = None
     details: Dict[str, Any] = field(default_factory=dict)
     signals: List[ModerationSignal] = field(default_factory=list)
+    status: AnalysisStatus = AnalysisStatus.SAFE
 
     @property
     def allowed(self) -> bool:
@@ -120,6 +129,7 @@ class ModerationResult:
             "category": self.category.value,
             "severity": self.severity.value,
             "confidence": self.confidence,
+            "status": self.status.value,
             "reason_ar": self.reason_ar,
             "reasons": self.reasons,
             "matched_rules": self.matched_rules,

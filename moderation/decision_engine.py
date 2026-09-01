@@ -10,7 +10,8 @@ from moderation.models import (
     ViolationCategory,
     SeverityLevel,
     ModerationResult,
-    ModerationSignal
+    ModerationSignal,
+    AnalysisStatus
 )
 
 
@@ -98,12 +99,14 @@ class DecisionEngine:
         if security_violations:
             top_sec = max(security_violations, key=lambda s: (self._sev_score(s.severity), s.confidence))
             all_reasons = [f"[{s.source}] {s.reason}" for s in security_violations]
+            sec_status = AnalysisStatus.UNSUPPORTED if "unsupported" in top_sec.reason.lower() else AnalysisStatus.FAILED
             return ModerationResult(
                 is_allowed=False,
                 action=ModerationAction.BLOCK,
                 category=top_sec.category,
                 severity=top_sec.severity,
                 confidence=top_sec.confidence,
+                status=sec_status,
                 reason_ar=self._format_security_reason_ar(top_sec),
                 reasons=all_reasons,
                 matched_rules=[f"RULE_SECURITY_{s.source}" for s in security_violations],
@@ -135,6 +138,7 @@ class DecisionEngine:
                 category=top_content.category,
                 severity=top_content.severity,
                 confidence=top_content.confidence,
+                status=AnalysisStatus.SAFE,
                 reason_ar=self._format_content_reason_ar(top_content),
                 reasons=all_reasons,
                 matched_rules=[f"RULE_{s.source}_{s.category.value.upper()}" for s in content_violations],
@@ -143,13 +147,14 @@ class DecisionEngine:
                 details=details or {}
             )
 
-        # 3. محتوى آمن تماماً
+        # 3. محتوى آمن ومفحوص تماماً
         return ModerationResult(
             is_allowed=True,
             action=ModerationAction.ALLOW,
             category=ViolationCategory.NONE,
             severity=SeverityLevel.LOW,
             confidence=1.0,
+            status=AnalysisStatus.SAFE,
             reason_ar="",
             reasons=[],
             matched_rules=[],

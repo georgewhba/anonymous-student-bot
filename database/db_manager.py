@@ -168,7 +168,6 @@ class DatabaseManager:
         ssl_mode: Optional[str] = None
     ):
         self.db_url = db_url
-        self.db_path = db_url  # للتوافق القديم
         self.crypto = crypto
 
         self.pool = DatabasePool(

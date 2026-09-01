@@ -84,7 +84,7 @@ async def test_document_filename_sanitization_and_vault_decryption(test_crypto, 
         moderator_ids=[moderator_id],
         admin_password_hash=hash_admin_password("Secret#2026"),
         encryption_key=generate_encryption_key(),
-        database_path=test_db.db_path
+        database_url=test_db.db_url
     )
 
     # توثيق جلسة المسؤول الأساسي وجلسة المشرف
@@ -187,10 +187,10 @@ async def test_per_admin_individual_credentials(test_db):
         moderator_ids=[mod_id],
         admin_password_hash=hash_admin_password("GlobalFallbackPass"),
         encryption_key=generate_encryption_key(),
-        database_path=test_db.db_path
+        database_url=test_db.db_url
     )
 
-    manager = AdminSessionManager(db_path=test_db.db_path)
+    manager = AdminSessionManager()
 
     # تسجيل الدخول بكلمة المرور الفردية
     ok, err = manager.authenticate(mod_id, mod_pass, settings, custom_password_hash=stored_hash)

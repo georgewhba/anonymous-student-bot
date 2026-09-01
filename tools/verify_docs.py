@@ -114,6 +114,10 @@ def verify_readme_and_structure() -> int:
         "requirements.txt",
         ".env.example",
         "REQUIREMENTS_MATRIX.md",
+        "FINAL_AUDIT.md",
+        "DATABASE.md",
+        "SECURITY.md",
+        "DEPLOYMENT.md",
         "security/crypto.py",
         "security/auth.py",
         "security/escaping.py",
@@ -144,6 +148,8 @@ def verify_readme_and_structure() -> int:
         "utils/key_generator.py",
         "tools/verify_docs.py",
         "tools/final_audit.py",
+        "tools/run_all_checks.py",
+        "tools/migrate_sqlite_to_postgres.py",
     ]
 
     for rel_path in files_to_check:

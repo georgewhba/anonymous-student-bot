@@ -87,8 +87,7 @@ class AdminSessionManager:
     - دعم كلمات المرور الفردية لكل مشرف مع التراجع الآمن
     """
 
-    def __init__(self, db_path: Optional[str] = None):
-        self.db_path = db_path
+    def __init__(self):
         # {user_id: {"authenticated_at": float, "role": AdminRole}}
         self._sessions: Dict[int, Dict[str, Any]] = {}
         # {user_id: [timestamp1, timestamp2, ...]}
