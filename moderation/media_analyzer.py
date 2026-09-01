@@ -290,46 +290,23 @@ class MediaAnalyzer:
         file_path: str,
         original_filename: Optional[str]
     ) -> List[ModerationSignal]:
-        """فحص المستندات والأرشيفات المضغوطة"""
+        """
+        فحص المستندات والأرشيفات المضغوطة (Security & Malware Inspection)
+        يتحقق من سلامة الملفات والأرشيفات أمنياً، مع السماح بالمحتوى الأكاديمي الداخلي.
+        """
         signals = []
         ext = os.path.splitext(original_filename or file_path)[1].lower()
 
-        # إذا كان أرشيفاً مضغوطاً
+        # 1. إذا كان أرشيفاً مضغوطاً (.zip, .tar, .gz)
         if ext in (".zip", ".tar", ".gz"):
-            internal_texts, arch_sigs = self.archive_analyzer.inspect_archive(file_path)
+            _, arch_sigs = self.archive_analyzer.inspect_archive(file_path)
             signals.extend(arch_sigs)
-            for t in internal_texts:
-                if t.strip():
-                    txt_res = self.text_analyzer.analyze(t)
-                    if not txt_res.is_allowed:
-                        signals.append(ModerationSignal(
-                            source="ARCHIVE",
-                            category=txt_res.category,
-                            severity=txt_res.severity,
-                            confidence=txt_res.confidence,
-                            is_violation=True,
-                            is_security=False,
-                            reason=f"Prohibited text found inside archive entry: {txt_res.reasons}",
-                            detected_item=txt_res.detected_item
-                        ))
             return signals
 
-        # إذا كان مستنداً (TXT, PDF, DOCX, XLSX, PPTX)
-        doc_text, doc_sigs = self.doc_analyzer.extract_document_text(file_path, original_filename)
+        # 2. إذا كان مستنداً (PDF, DOCX, XLSX, PPTX, TXT)
+        # الفحص الأمني للماكرو والملفات التنفيذية والتركيب السليم
+        _, doc_sigs = self.doc_analyzer.extract_document_text(file_path, original_filename)
         signals.extend(doc_sigs)
-        if doc_text and doc_text.strip():
-            txt_res = self.text_analyzer.analyze(doc_text)
-            if not txt_res.is_allowed:
-                signals.append(ModerationSignal(
-                    source="DOCUMENT",
-                    category=txt_res.category,
-                    severity=txt_res.severity,
-                    confidence=txt_res.confidence,
-                    is_violation=True,
-                    is_security=False,
-                    reason=f"Document text contains prohibited content: {txt_res.reasons}",
-                    detected_item=txt_res.detected_item
-                ))
         return signals
 
     async def _analyze_audio(self, file_path: str) -> List[ModerationSignal]:

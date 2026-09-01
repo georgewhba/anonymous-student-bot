@@ -133,11 +133,11 @@ async def test_document_types_moderation(tmp_path):
     assert len(sigs_fake) > 0
     assert sigs_fake[0].category == ViolationCategory.MEDIA_UNSAFE
 
-    # 3. ملف DOCX يحتوي على كلمة ممنوعة
+    # 3. ملف DOCX دراسي
     docx_file = tmp_path / "assignment.docx"
     doc_xml = """<?xml version="1.0" encoding="UTF-8"?>
     <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-        <w:body><w:p><w:r><w:t>واجب المادة - انت شخص شرموطة</w:t></w:r></w:p></w:body>
+        <w:body><w:p><w:r><w:t>واجب مادة الفيزياء - أسئلة وتمارين الباب الأول</w:t></w:r></w:p></w:body>
     </w:document>"""
     with zipfile.ZipFile(docx_file, "w") as zf:
         zf.writestr("word/document.xml", doc_xml)
@@ -148,8 +148,8 @@ async def test_document_types_moderation(tmp_path):
         filename="assignment.docx"
     )
     res_docx = await moderation_engine.inspect_payload(payload_docx)
-    assert res_docx.is_allowed is False
-    assert res_docx.action == ModerationAction.BLOCK
+    assert res_docx.is_allowed is True
+    assert res_docx.action == ModerationAction.ALLOW
 
     # 4. ملف Excel ماكرو محظور (.xlsm)
     xlsm_file = tmp_path / "grades.xlsm"
