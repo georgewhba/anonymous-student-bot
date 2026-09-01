@@ -28,11 +28,14 @@ def get_url():
         except Exception:
             url = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/anonymous_bot")
 
-    # If standard postgresql:// is provided, use postgresql+psycopg:// for SQLAlchemy
-    if url.startswith("postgresql://"):
-        url = "postgresql+psycopg://" + url[len("postgresql://"):]
+    # Alembic needs a synchronous driver — use psycopg2.
+    # asyncpg is used by the bot at runtime; psycopg2-binary is used only here.
+    if url.startswith("postgresql+psycopg://"):
+        url = "postgresql+psycopg2://" + url[len("postgresql+psycopg://"):]
+    elif url.startswith("postgresql://"):
+        url = "postgresql+psycopg2://" + url[len("postgresql://"):]
     elif url.startswith("postgres://"):
-        url = "postgresql+psycopg://" + url[len("postgres://"):]
+        url = "postgresql+psycopg2://" + url[len("postgres://"):]
 
     return url
 
