@@ -191,7 +191,28 @@ volumes:
 
 ---
 
-## 6. Migration from Legacy SQLite
+## 6. Railway Cloud Deployment
+
+Railway provides built-in PostgreSQL databases and native Dockerfile support:
+
+1. Connect your repository to **Railway.app**.
+2. Click **+ Create** -> **Database** -> **Add PostgreSQL**.
+3. Click **+ Create** -> **GitHub Repo** -> Select `anonymous-student-bot`.
+4. In the bot service's **Variables** tab, set:
+   - `BOT_TOKEN`
+   - `CHANNEL_ID`
+   - `PRIMARY_ADMIN_ID`
+   - `ENCRYPTION_KEY`
+   - `ADMIN_PASSWORD_HASH`
+   - `DATABASE_URL` = `${{Postgres.DATABASE_URL}}`
+   - `ENABLE_PROFANITY_FILTER` = `true`
+   - `OCR_ENABLED` = `true`
+5. Railway will automatically build the Dockerfile, apply migrations (`alembic upgrade head`), and start the bot 24/7.
+6. Detailed step-by-step instructions available in [RAILWAY_DEPLOY_GUIDE.md](file:///c:/Users/georg/.gemini/antigravity-ide/scratch/anonymous-student-bot/RAILWAY_DEPLOY_GUIDE.md).
+
+---
+
+## 7. Migration from Legacy SQLite
 
 To migrate legacy data from a historical SQLite file:
 
