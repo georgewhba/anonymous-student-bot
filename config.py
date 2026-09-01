@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     primary_admin_id: Optional[int] = Field(default=None, alias="PRIMARY_ADMIN_ID")
 
     # قائمة معرفات المشرفين (Moderators) - حظر، كتم، وحذف دون كشف الهوية
-    moderator_ids: List[int] = Field(default_factory=list, alias="MODERATOR_IDS")
+    moderator_ids: Union[List[int], str, int, None] = Field(default_factory=list, alias="MODERATOR_IDS")
 
     # قائمة المشرفين العامة (للتوافق القديم)
     admin_ids_raw: Optional[Union[List[int], str, int]] = Field(default=None, alias="ADMIN_IDS")
