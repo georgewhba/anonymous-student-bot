@@ -1,0 +1,32 @@
+[
+  {
+    "category": "threats",
+    "text": "سوف اقتلك غدا بعد المحاضرة",
+    "expected_allowed": false
+  },
+  {
+    "category": "threats",
+    "text": "هـ ـد بـ حـ ك فـ ي الـ كـ لـ يـ ة",
+    "expected_allowed": false
+  },
+  {
+    "category": "harassment",
+    "text": "يا حيوان يا غبي يا فاشل يا منحط",
+    "expected_allowed": false
+  },
+  {
+    "category": "sexual",
+    "text": "مطلوب صور سكس وسكسي وبورن",
+    "expected_allowed": false
+  },
+  {
+    "category": "hate",
+    "text": "عنصري كافر ملحد مجرم لعنة الله عليك",
+    "expected_allowed": false
+  },
+  {
+    "category": "self_harm",
+    "text": "اريد الانتحار وسوف اقطع شراييني اليوم",
+    "expected_allowed": false
+  }
+]

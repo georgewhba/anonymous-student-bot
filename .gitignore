@@ -1,0 +1,46 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Databases and SQLite storage
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+data/
+data/**
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Testing and linters
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Temporary media & upload directories
+temp/
+/tmp/
+media_tmp/
+uploads_tmp/
+
+# Backups
+*.bak
+*.backup

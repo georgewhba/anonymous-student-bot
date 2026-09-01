@@ -1,0 +1,27 @@
+[
+  {
+    "category": "threats",
+    "text": "I will kill you tomorrow at school",
+    "expected_allowed": false
+  },
+  {
+    "category": "profanity",
+    "text": "you are a complete f*ck and b!tch",
+    "expected_allowed": false
+  },
+  {
+    "category": "sexual",
+    "text": "send nude photos and porn videos",
+    "expected_allowed": false
+  },
+  {
+    "category": "harassment",
+    "text": "you are a pathetic loser kys",
+    "expected_allowed": false
+  },
+  {
+    "category": "hate",
+    "text": "kill all minorities subhuman scum",
+    "expected_allowed": false
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "technique": "tatweel_and_tashkeel",
+    "text": "شــــــتـــــيـــــمـــــة قـــذرة",
+    "expected_allowed": false
+  },
+  {
+    "technique": "zero_width_chars",
+    "text": "ك\u200bس\u200cأ\u200dم\u200eك",
+    "expected_allowed": false
+  },
+  {
+    "technique": "spaced_letters",
+    "text": "ش ت ي م ة ق ذ ر ة",
+    "expected_allowed": false
+  },
+  {
+    "technique": "homoglyphs",
+    "text": "ѕ\u0435х р\u043ern shаrmоtа",
+    "expected_allowed": false
+  },
+  {
+    "technique": "leetspeak",
+    "text": "f.u.c.k y0u b1tch",
+    "expected_allowed": false
+  },
+  {
+    "technique": "repeated_chars",
+    "text": "shaaaarmmmmooooootaaa",
+    "expected_allowed": false
+  }
+]

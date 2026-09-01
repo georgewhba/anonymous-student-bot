@@ -1,0 +1,22 @@
+[
+  {
+    "category": "arabizi_profanity",
+    "text": "enta ebn sharmota ya 7ayawan",
+    "expected_allowed": false
+  },
+  {
+    "category": "arabizi_profanity",
+    "text": "kosomak ya 3ars ya m3aras",
+    "expected_allowed": false
+  },
+  {
+    "category": "arabizi_sexual",
+    "text": "3ayez sex w sharameet f el gam3a",
+    "expected_allowed": false
+  },
+  {
+    "category": "arabizi_harassment",
+    "text": "enta a5yat wa7ed f el dof3a",
+    "expected_allowed": false
+  }
+]

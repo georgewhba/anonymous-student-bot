@@ -1,0 +1,27 @@
+[
+  {
+    "context": "academic_math",
+    "text": "السلام عليكم، ما هو حل مسألة التكامل المحدود من 0 إلى 1 للدالة sin(x) dx؟",
+    "expected_allowed": true
+  },
+  {
+    "context": "academic_cs",
+    "text": "هل يمكن لأحد شرح خوارزمية البحث الثنائي Binary Search في لغة بايثون؟",
+    "expected_allowed": true
+  },
+  {
+    "context": "academic_physics",
+    "text": "ما هو الفرق بين السرعة المتجهة والسرعة القياسية في الفيزياء الكلاسيكية؟",
+    "expected_allowed": true
+  },
+  {
+    "context": "academic_schedule",
+    "text": "متى موعد تسليم التقرير النهائي لمشروع التخرج وما هو النموذج المعتمد؟",
+    "expected_allowed": true
+  },
+  {
+    "context": "academic_english",
+    "text": "Could someone please explain the main difference between stack and queue data structures in computer science?",
+    "expected_allowed": true
+  }
+]
